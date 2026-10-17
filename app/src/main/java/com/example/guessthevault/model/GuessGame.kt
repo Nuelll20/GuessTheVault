@@ -41,6 +41,16 @@ class GuessGame {
         attempts = 0
     }
 
+    fun restoreState(
+        savedSecretNumber: Int,
+        savedScore: Int,
+        savedAttempts: Int
+    ) {
+        secretNumber = savedSecretNumber
+        score = savedScore
+        attempts = savedAttempts
+    }
+
     fun getSecretNumber(): Int {
         return secretNumber
     }

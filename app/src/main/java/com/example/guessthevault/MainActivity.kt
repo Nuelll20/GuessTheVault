@@ -19,13 +19,19 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnReset: Button
 
     private val game = GuessGame()
+    private var gameFinished = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         connectViews()
-        updateGameInformation()
+
+        if (savedInstanceState == null) {
+            updateGameInformation()
+        } else {
+            restoreGameState(savedInstanceState)
+        }
 
         btnGuess.setOnClickListener {
             submitGuess()
@@ -96,24 +102,79 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun finishGame() {
-        etGuess.isEnabled = false
-        btnGuess.isEnabled = false
-        btnReset.visibility = View.VISIBLE
+        gameFinished = true
+        updateGameControls()
+    }
+
+    private fun updateGameControls() {
+        etGuess.isEnabled = !gameFinished
+        btnGuess.isEnabled = !gameFinished
+
+        btnReset.visibility = if (gameFinished) {
+            View.VISIBLE
+        } else {
+            View.GONE
+        }
     }
 
     private fun resetGame() {
         game.resetGame()
+        gameFinished = false
 
         updateGameInformation()
+        updateGameControls()
 
         tvStatus.text = "Masukkan tebakan pertama Anda"
         tvStatus.setTextColor(Color.WHITE)
 
         etGuess.text.clear()
-        etGuess.isEnabled = true
-        btnGuess.isEnabled = true
-        btnReset.visibility = View.GONE
-
         etGuess.requestFocus()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putInt(KEY_SECRET_NUMBER, game.getSecretNumber())
+        outState.putInt(KEY_SCORE, game.score)
+        outState.putInt(KEY_ATTEMPTS, game.attempts)
+        outState.putString(KEY_STATUS_TEXT, tvStatus.text.toString())
+        outState.putInt(KEY_STATUS_COLOR, tvStatus.currentTextColor)
+        outState.putString(KEY_INPUT, etGuess.text.toString())
+        outState.putBoolean(KEY_GAME_FINISHED, gameFinished)
+
+        super.onSaveInstanceState(outState)
+    }
+
+    private fun restoreGameState(savedState: Bundle) {
+        game.restoreState(
+            savedSecretNumber = savedState.getInt(
+                KEY_SECRET_NUMBER,
+                game.getSecretNumber()
+            ),
+            savedScore = savedState.getInt(KEY_SCORE, 100),
+            savedAttempts = savedState.getInt(KEY_ATTEMPTS, 0)
+        )
+
+        gameFinished = savedState.getBoolean(KEY_GAME_FINISHED, false)
+
+        tvStatus.text = savedState.getString(KEY_STATUS_TEXT)
+            ?: "Masukkan tebakan pertama Anda"
+
+        tvStatus.setTextColor(
+            savedState.getInt(KEY_STATUS_COLOR, Color.WHITE)
+        )
+
+        etGuess.setText(savedState.getString(KEY_INPUT, ""))
+
+        updateGameInformation()
+        updateGameControls()
+    }
+
+    companion object {
+        private const val KEY_SECRET_NUMBER = "secret_number"
+        private const val KEY_SCORE = "score"
+        private const val KEY_ATTEMPTS = "attempts"
+        private const val KEY_STATUS_TEXT = "status_text"
+        private const val KEY_STATUS_COLOR = "status_color"
+        private const val KEY_INPUT = "input"
+        private const val KEY_GAME_FINISHED = "game_finished"
     }
 }
