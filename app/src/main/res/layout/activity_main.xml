@@ -124,7 +124,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:gravity="center"
-            android:text="Setiap tebakan yang salah mengurangi skor sebesar 10 poin."
+            android:text="Setiap tebakan yang salah mengurangi skor sebesar 5 poin."
             android:textColor="#8B949E"
             android:textSize="13sp" />
 

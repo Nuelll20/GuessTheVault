@@ -21,7 +21,7 @@ class GuessGame {
             return "CORRECT"
         }
 
-        score -= 10
+        score -= 5
 
         if (score <= 0) {
             score = 0
