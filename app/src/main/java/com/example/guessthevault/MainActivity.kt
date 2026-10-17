@@ -74,6 +74,18 @@ class MainActivity : AppCompatActivity() {
                 finishGame()
             }
 
+            "CLOSE_LOW" -> {
+                tvStatus.text =
+                    "Sangat mendekati! Naikkan sedikit angkanya."
+                tvStatus.setTextColor(Color.parseColor("#58A6FF"))
+            }
+
+            "CLOSE_HIGH" -> {
+                tvStatus.text =
+                    "Sangat mendekati! Turunkan sedikit angkanya."
+                tvStatus.setTextColor(Color.parseColor("#58A6FF"))
+            }
+
             "TOO_LOW" -> {
                 tvStatus.text = "Terlalu rendah! Coba angka yang lebih besar."
                 tvStatus.setTextColor(Color.parseColor("#F5C451"))

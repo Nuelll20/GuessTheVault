@@ -1,5 +1,6 @@
 package com.example.guessthevault.model
 
+import kotlin.math.abs
 class GuessGame {
 
     private var secretNumber: Int = generateSecretNumber()
@@ -28,10 +29,24 @@ class GuessGame {
             return "GAME_OVER"
         }
 
-        return if (guess < secretNumber) {
-            "TOO_LOW"
-        } else {
-            "TOO_HIGH"
+        val difference = abs(guess - secretNumber)
+
+        return when {
+            difference <= 5 && guess < secretNumber -> {
+                "CLOSE_LOW"
+            }
+
+            difference <= 5 && guess > secretNumber -> {
+                "CLOSE_HIGH"
+            }
+
+            guess < secretNumber -> {
+                "TOO_LOW"
+            }
+
+            else -> {
+                "TOO_HIGH"
+            }
         }
     }
 
