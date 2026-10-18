@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -13,29 +12,31 @@
         android:orientation="vertical"
         android:padding="20dp">
 
-        <!-- Bagian informasi permainan -->
+        <!-- Panel informasi pemain, skor, dan percobaan -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#53159A"
+            android:layout_marginTop="14dp"
+            android:background="@drawable/bg_header_pill"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:padding="16dp">
+            android:padding="12dp">
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="sans-serif-medium"
-                android:text="VAULT PLAYER&#10;LEVEL 1"
+                android:text="VAULT PLAYER"
                 android:textColor="#FFFFFF"
-                android:textSize="14sp" />
+                android:textSize="13sp" />
 
             <TextView
                 android:id="@+id/tvScore"
                 android:layout_width="74dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:translationY="4dp"
                 android:fontFamily="sans-serif-medium"
                 android:text="SKOR&#10;100"
                 android:textColor="#FFD95A"
@@ -46,6 +47,7 @@
                 android:layout_width="90dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:translationY="4dp"
                 android:fontFamily="sans-serif-medium"
                 android:text="PERCOBAAN&#10;0"
                 android:textColor="#FFFFFF"
@@ -53,7 +55,7 @@
 
         </LinearLayout>
 
-        <!-- Logo sederhana tanpa menambahkan file gambar -->
+        <!-- Logo brankas -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -75,6 +77,7 @@
             android:textSize="32sp"
             android:textStyle="bold" />
 
+        <!-- Slogan permainan -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -100,7 +103,7 @@
             android:textColor="#FFFFFF"
             android:textSize="16sp" />
 
-        <!-- Input angka -->
+        <!-- Kolom input angka -->
         <EditText
             android:id="@+id/etGuess"
             android:layout_width="match_parent"
@@ -118,7 +121,7 @@
             android:textColorHint="#877A9A"
             android:textSize="18sp" />
 
-        <!-- Tombol menebak -->
+        <!-- Tombol membuka brankas -->
         <Button
             android:id="@+id/btnGuess"
             android:layout_width="match_parent"
@@ -131,7 +134,7 @@
             android:textColor="#FFFFFF"
             android:textSize="17sp" />
 
-        <!-- Tombol reset, tetap dikendalikan MainActivity -->
+        <!-- Tombol mengulang permainan -->
         <Button
             android:id="@+id/btnReset"
             android:layout_width="match_parent"
@@ -145,7 +148,7 @@
             android:textSize="17sp"
             android:visibility="gone" />
 
-        <!-- Informasi permainan -->
+        <!-- Keterangan permainan -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
